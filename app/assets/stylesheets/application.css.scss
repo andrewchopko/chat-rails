@@ -12,6 +12,72 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
  */
- @import "bootstrap-sprockets";
- @import "bootstrap";
+ @import "materialize";
+ body {
+     display: flex;
+     min-height: 100vh;
+     flex-direction: column;
+   }
+
+   body .main {
+     flex: 1 0 auto;
+     margin-top: 30px;
+   }
+
+   .badge{
+     margin-top: -50px;
+   }
+   .collection .collection-item li .new{
+     background: #4a148c;
+   }
+
+   .chip{
+     margin-top: 5px;
+   }
+
+   .chatMembers{
+     height: 450px;
+     overflow-y: scroll;
+   }
+
+   .chat{
+     height: 370px;
+     overflow-y: scroll;
+     border-bottom: 1px solid #eee;
+   }
+
+   .chatMembers::-webkit-scrollbar, .chat::-webkit-scrollbar{
+     width: 0.5em;
+   }
+   .chatMembers::-webkit-scrollbar-track, .chat::-webkit-scrollbar-track {
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   }
+   .chatMembers::-webkit-scrollbar-thumb, .chat::-webkit-scrollbar-thumb {
+     background-color: #4a148c;
+     outline: 1px solid #4a148c;
+   }
+   .main .title{
+     color: #4a148c;
+     font-weight: bold;
+     font-size: 20px;
+   }
+
+   .collection-item .title{
+     font-size: 16px;
+   }
+
+   .collection .collection-item li p{
+     color: #999;
+   }
+
+   .s12 .row .materialize-textarea:focus, .main form .row .input-field .validate:focus{
+     color: #4a148c;
+     box-shadow: 0 1px 0 0 #4a148c;;
+     border-color: #4a148c;
+   }
+
+   .s12 .row .input-field .prefix.active, .s12 .row .materialize-textarea:focus:not([readonly])+label, .main form .row .input-field .validate:focus:not([readonly])+label{
+     color: #4a148c;
+   }

@@ -1,0 +1,12 @@
+= provide(:title, "Index Action")
+%h1 Chat WebApp 4 MLSDev
+
+= link_to (new_chat_path(@chat)), class:"btn-floating btn-large waves-effect waves-light purple darken-4" do
+  = material_icon.add
+%ul.collection
+  - @chats.each do |c|
+    = link_to (c), class: "collection-item" do
+      %li
+        %span.title= c.name
+        %p= "Admin name"
+        %span.new.badge= "4"

@@ -1,0 +1,31 @@
+!!!
+%html
+%head
+  %title
+    = yield(:title)
+    | Test4MLSDev
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+%body
+  %header
+    %nav
+      .nav-wrapper.purple.darken-4
+        = link_to "Chatizza", root_path, class: "brand-logo"
+        %ul#nav-mobile.right.hide-on-med-and-down
+          - if user_signed_in?
+            = "Hello, " + current_user.email
+            = link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            %li
+              = link_to "Sign In", new_user_session_path
+            %li
+              = link_to "Sign Up", new_user_registration_path
+  .main.container
+    = yield
+
+%footer.page-footer.purple.darken-4
+  .footer-copyright
+    .container
+      © 2016 Copyright Text
+      %a.grey-text.text-lighten-4.right{:href => "https://ua.linkedin.com/in/andreychopko/en"} Andrey Chopko
