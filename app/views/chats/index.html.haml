@@ -9,8 +9,9 @@
       = link_to (c), class: "collection-item" do
         %li
           %span.title= c.name
-          %p= c.user.name
-          %span.new.badge= "4"
+          %p= c.admin_id
+          %span.new.badge= c.unread_messages
 - else
-  = link_to "Sign In", new_user_session_path, class: "waves-effect waves-light btn-large purple darken-4"
-  = link_to "Sign Up", new_user_registration_path, class: "waves-effect waves-light btn-large purple darken-4"
+  .notlogged
+    = link_to "Sign In", new_user_session_path, class: "waves-effect waves-light btn-large purple darken-4"
+    = link_to "Sign Up", new_user_registration_path, class: "waves-effect waves-light btn-large purple darken-4"
