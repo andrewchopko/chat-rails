@@ -1,10 +1,14 @@
+<%= provide(:title, "Sign In") %>
 <h2>Log in</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <div class="input-field col s7">
+      <%= f.input :email, required: false, autofocus: true, class: "validate" %>
+    </div>
+    <div class="input-field col s7">
+      <%= f.input :password, required: false, class: "validate" %>
+    </div>
   </div>
 
   <div class="form-actions">

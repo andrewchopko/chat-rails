@@ -1,6 +1,3 @@
 %h1 New Message
 
-= simple_form_for [@chat, @message] do |f|
-  = f.input :content, label: "Enter content"
-  %br/
-  = f.button :submit, "Send"
+= render 'messages/form_sent'

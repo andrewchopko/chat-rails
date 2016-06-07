@@ -1,0 +1,4 @@
+= simple_form_for [@chat, @chat.messages.build] do |f|
+  = f.input :content, label: "Enter content", autofocus: true
+  %br/
+  = f.button :submit, "Send"

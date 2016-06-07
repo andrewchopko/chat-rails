@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'staticpage/home'
+
+  devise_for :users, :controllers => {registrations: 'registrations'}
   resources :chats do
     resources :messages
   end

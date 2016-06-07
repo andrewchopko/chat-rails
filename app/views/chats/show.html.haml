@@ -3,6 +3,22 @@
 %h1
   = @chat.name
 
+
+.col.s12
+  .chat
+    %ul.collection
+      - @messages.each do |m|
+        %li.collection-item
+          - if m.user.name.blank?
+            %span.title= m.user.email
+          - else
+            %span.title= m.user.name
+          %p= m.content
+= render 'messages/form_sent'
+
+= link_to "New Message", new_chat_message_path(@chat)
+
+
 = link_to "Edit", edit_chat_path
 = link_to "Home", root_path
 = link_to "Delete", chat_path(@chat), method: :delete
