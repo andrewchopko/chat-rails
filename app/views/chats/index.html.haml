@@ -10,7 +10,10 @@
         %li
           %span.title= c.name
           %p= c.admin_id
-          %span.new.badge= c.unread_messages
+          - if current_user != c.admin_id
+            %span.new.badge= c.unread_messages
+          - else
+            %span.new.badge= c.unread_messages_admin
 - else
   .notlogged
     = link_to "Sign In", new_user_session_path, class: "waves-effect waves-light btn-large purple darken-4"

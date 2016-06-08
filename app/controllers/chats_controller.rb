@@ -32,8 +32,10 @@ class ChatsController < ApplicationController
 
   def update
     @chat.update(chat_params)
-    @chat.update_attribute(:unread_messages, 10)
-    @chat.update_attribute(:unread_messages_admin, 25)
+    @user = User.find(@chat.user_id)
+    @admin = User.find(@chat.admin_id)
+    @chat.update_attribute(:unread_messages, count_unread_messages_for_user(@chat, @user))
+    @chat.update_attribute(:unread_messages_admin, count_unread_messages_for_admin(@chat, @admin))
     redirect_to @chat
   end
 
@@ -60,12 +62,24 @@ class ChatsController < ApplicationController
   def count_unread_messages_for_user(chat, user)
     @messages = Message.find_by_sql(["SELECT * FROM messages WHERE (chat_id = :chat_id AND user_id = :user_id)", {:chat_id => chat.id, :user_id => user.id}])
     @user = User.find(user.id)
-    @const = 0
+    @un_mes = 0
     @messages.each do |m|
       if(m.created_at.to_i > @user.current_sign_in_at.to_i)
-        @const += 1
+        @un_mes += 1
       end
     end
-    return @const
+    return @un_mes
+  end
+
+  def count_unread_messages_for_admin(chat, user)
+    @messages = Message.find_by_sql(["SELECT * FROM messages WHERE (chat_id = :chat_id AND user_id = :admin_id)", {:chat_id => chat.id, :admin_id => chat.admin_id.to_s}])
+    @user = User.find(user.id)
+    @un_mes = 0
+    @messages.each do |m|
+      if(m.created_at.to_i > @user.current_sign_in_at.to_i)
+        @un_mes += 1
+      end
+    end
+    return @un_mes
   end
 end
