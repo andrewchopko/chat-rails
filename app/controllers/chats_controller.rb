@@ -8,10 +8,19 @@ class ChatsController < ApplicationController
       @chats = Chat.find_by_sql(["SELECT * FROM chats WHERE (user_id = :id OR admin_id = :id)", {:id => current_user.id.to_s}])
       @users = User.all
     end
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @chats, status: 200}
+    end
   end
 
   def new
     @chat = Chat.new
+    respond_to do |format|
+      format.html
+      format.json {render json:@chat, status: :ok}
+    end
   end
 
   def create
@@ -22,6 +31,10 @@ class ChatsController < ApplicationController
 
     if @chat.save
       redirect_to @chat
+      respond_to do |format|
+        format.html
+        format.json { render json: @chat, status: 201, location: @chat}
+      end
     else
       render "new"
     end
@@ -37,6 +50,10 @@ class ChatsController < ApplicationController
     @chat.update_attribute(:unread_messages, count_unread_messages_for_user(@chat, @user))
     @chat.update_attribute(:unread_messages_admin, count_unread_messages_for_admin(@chat, @admin))
     redirect_to @chat
+    respond_to do |format|
+      format.html
+      format.json { render json: @chat, status: 200}
+    end
   end
 
   def destroy
